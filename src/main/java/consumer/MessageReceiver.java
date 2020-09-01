@@ -85,11 +85,11 @@ public class MessageReceiver {
     }
 
     private InputStream downloadOriginalBookAsStream(){
-        InputStream stream = null;
+        InputStream stream;
         try {
             stream = getMinioClient().getObject(
                     GetObjectArgs.builder()
-                            .bucket("original-ebookk")
+                            .bucket("original-ebook")
                             .object("alice.epub")
                             .build());
         }catch (InvalidKeyException | NoSuchAlgorithmException | ErrorResponseException | InvalidResponseException | InvalidBucketNameException |

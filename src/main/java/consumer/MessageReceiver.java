@@ -113,9 +113,7 @@ public class MessageReceiver {
 
         MinioClient minioClient = getMinioClient();
         try {
-            if (!minioClient.bucketExists(BucketExistsArgs.builder().bucket("ebookcreator").build())) {
-                minioClient.makeBucket(MakeBucketArgs.builder().bucket("ebookcreator").build());
-            }
+
             ObjectWriteResponse response = createBucketAndUploadFile(minioClient, filename);
             if (response != null) {
                 String url = createURL(minioClient, filename);
@@ -130,7 +128,11 @@ public class MessageReceiver {
     }
 
     private ObjectWriteResponse createBucketAndUploadFile(MinioClient minioClient, String filename) throws
-            IOException, InvalidKeyException, InvalidResponseException, InsufficientDataException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, InvalidBucketNameException, ErrorResponseException {
+            IOException, InvalidKeyException, InvalidResponseException, InsufficientDataException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, InvalidBucketNameException, ErrorResponseException, RegionConflictException {
+
+        if (!minioClient.bucketExists(BucketExistsArgs.builder().bucket("ebookcreator").build())) {
+            minioClient.makeBucket(MakeBucketArgs.builder().bucket("ebookcreator").build());
+        }
         return minioClient.uploadObject(UploadObjectArgs.builder()
                 .bucket("ebookcreator")
                 .object(filename)

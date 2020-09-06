@@ -65,8 +65,6 @@ public class MessageReceiver {
 
         prepareRabbitQueue(channel);
 
-        System.out.println("Waiting for messages...");
-
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println(" [x] Received '" + message + "'");

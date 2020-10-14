@@ -1,5 +1,7 @@
 # This project demonstrates how to consume messages from RabbitMQ, sign an ebook based on the received message, and upload the ebook to Minio Cloud storage.
 
+## This project is a demo for my technical article on Medium:
+https://medium.com/better-programming/java-process-messages-from-rabbitmq-and-upload-data-to-minio-cloud-b70ecd2e82be
 
 ## **Prerequisites**
 
